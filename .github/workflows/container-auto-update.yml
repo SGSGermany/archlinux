@@ -10,6 +10,10 @@ concurrency: build
 env:
   CI_TOOLS_SETUP: https://raw.githubusercontent.com/SGSGermany/ci-tools/main/setup.sh
 
+defaults:
+  run:
+    shell: bash -eu -o pipefail {0}
+
 jobs:
   build:
     runs-on: ubuntu-latest
