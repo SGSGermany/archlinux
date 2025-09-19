@@ -37,9 +37,6 @@ MOUNT="$(buildah mount "$CONTAINER")"
 cmd buildah run "$CONTAINER" -- \
     pacman -Syu --noconfirm
 
-cmd buildah run "$CONTAINER" -- \
-    pacman -Sc --noconfirm
-
 cleanup "$CONTAINER"
 
 cmd buildah config \
