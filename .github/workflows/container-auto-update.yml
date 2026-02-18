@@ -21,18 +21,10 @@ jobs:
       contents: read
       packages: write
 
-    strategy:
-      matrix:
-        BUILD_REF:
-          - refs/heads/main
-      fail-fast: false
-      max-parallel: 1
-
     env:
       REGISTRY: ghcr.io
       OWNER: sgsgermany
       IMAGE: archlinux
-      BUILD_REF: ${{ matrix.BUILD_REF }}
 
     steps:
       - name: Setup CI tools
@@ -43,8 +35,6 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: ${{ env.BUILD_REF }}
 
       - name: Log into container registry ${{ env.REGISTRY }}
         uses: redhat-actions/podman-login@v1
