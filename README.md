@@ -6,3 +6,14 @@ Arch Linux
 Arch Linux is no Linux distribution designed for containers, thus it's quite clunky with a compressed image size of more than 120 MB. Even though there's another [official Arch Linux image](https://hub.docker.com/r/archlinux/archlinux) available that is updated daily, we made the conscious decision to create our own image. The reason is that by using the daily updated image, our servers would have to download the full 120 MB image every single day, even if no package was updated. By using the weekly updated image as a basis and running `pacman -Syu` daily, our servers only have to download the changes since the last weekly build. This causes a higher disk usage, but spares a lot of traffic and updates run faster in general. However, we won't trigger a rebuild unless one of the [`base` packages](https://archlinux.org/packages/core/any/base/) was updated, thus we don't necessarily pick up the latest weekly build immediately.
 
 Please note that this image intentionally contains Pacman's sync databases (stored at `/var/lib/pacman/sync`). Install new packages using `pacman -S`. You *must not* update the sync database (i.e. `pacman -Sy`) without also upgrading the system (i.e. `pacman -Su`), because Arch Linux specifically [doesn't support partial upgrades](https://wiki.archlinux.org/title/System_maintenance#Partial_upgrades_are_unsupported). Since this image is updated pretty often, there is usually no need to perform a system upgrade yourself. However, if you want to install additional software and this software was updated since the last build, `pacman -S` will bail with "404 Not Found" errors. In this case you have to do a system upgrade first (i.e. run `pacman -Syu`).
+
+Licensing
+---------
+
+Made with ♥ by [SGS Serious Gaming & Simulations](https://www.sgs-online.info).
+
+This repository contains scripts and resources for building and continuously integrating an OCI container image, as well as components used to run it (e.g., setup scripts, runtime configuration, modified config files).
+
+All contents of this repository are free and open-source software, licensed under the terms of the [MIT License](./LICENSE).
+
+Please note that the resulting OCI container image includes not only the components provided in this repository, but also the third-party components constituting the operating system included in the image. These are licensed under their respective licenses and are not covered by the MIT License of this repository. Please refer to the respective component licenses for details.
